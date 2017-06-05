@@ -1,5 +1,5 @@
 
-# LeetCode ![Language](https://img.shields.io/badge/language-C%23-blue.svg) ![License](https://img.shields.io/dub/l/vibe-d.svg)
+# LeetCode ![Language](https://img.shields.io/badge/language-C%23-blue.svg) ![License](https://img.shields.io/badge/license-MIT-red.svg)
 LeetCode is a coding online judger. You may find the problem list here [LeetCode](https://leetcode.com/problemset/algorithms/).  
 
 ### Problem List
