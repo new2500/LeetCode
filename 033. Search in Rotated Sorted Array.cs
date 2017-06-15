@@ -29,39 +29,69 @@ Hide Similar Problems (M) Search in Rotated Sorted Array II (M) Find Minimum in 
 //if mid >= low, mid is in the left part, If target >= low && target < mid. Search left, otherwsie search right;
 //If mid < low, mid is in the right part, If target <= high and x> mid, search right part, otherwise seach left part
 //O(logN) time, 
-public int Search(int[] nums, int target)
-{
-	return helper(nums, 0, nums.Length-1, target)
-}
-
-
-public int helper(int[] nums, int low, int high, int target)
-{
-	if(low > high)
-		return -1;
-	
-	int mid = (high-low)/2 + low;
-	
-	if(nums[mid] == target)
-		return mind;
-	
-	if(nums[mid] >= nums[low])  //mid in the left
+	public int Search(int[] nums, int target)
 	{
-		if(target >= nums[low] && target < mid[mid]) //Search Left
-		   return helper(nums, low, mid-1, target);
-		
-        return helper(nums, mid+1, high, target);   Right
-	}
-	else     //nums[mid] < nums[low], mid in the right
-	{
-	    if(target<= nums[high] && target > nums[mid])   //Search Right
-			return helper(nums, mid+1, high,target);
-		
-		return helper(nums, low, mid-1, target);       //Left
+		return helper(nums, 0, nums.Length-1, target)
 	}
 
-}
 
-
+	public int helper(int[] nums, int low, int high, int target)
+	{
+		if(low > high)
+			return -1;
+	
+		int mid = (high-low)/2 + low;
+	
+		if(nums[mid] == target)
+			return mind;
+	
+		if(nums[mid] >= nums[low])  //Left part is sorted
+		{
+			if(target >= nums[low] && target < mid[mid]) //Search Left
+			return helper(nums, low, mid-1, target);
+		
+			return helper(nums, mid+1, high, target);   //Right
+		}
+		else     //nums[mid] < nums[low], Right part is sorted
+		{
+			if(target<= nums[high] && target > nums[mid])   //Search Right
+				return helper(nums, mid+1, high,target);
+		
+			return helper(nums, low, mid-1, target);       //Left
+		}
+	}
 
 #endregion
+
+#region  Iterative Binary Search
+
+	    public int Search(int[] nums, int target) {
+        int left = 0, right = nums.Length - 1;
+        
+        while(left <= right)
+        {
+            int mid = left + (right - left)/ 2;
+            
+            if(nums[mid] == target)
+                return mid;
+                
+            else if(nums[mid] > nums[left]) //Left part is sorted
+            {
+                if(target >= nums[left] && target <= nums[mid])
+                    right = mid - 1;
+                else
+                    left = mid + 1;
+            }
+            else if(nums[mid] < nums[left])
+            {
+                if(target <= nums[right] && target > nums[mid])
+                    left = mid + 1;
+                else
+                    right = mid - 1;
+            }
+            else
+                left++;
+        }
+        return -1;
+    }
+#else
